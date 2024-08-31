@@ -7,7 +7,7 @@ from langchain.agents.tools import BaseTool
 from langchain.agents.tools import tool as LangChainTool
 from langchain_core.agents import AgentAction
 from langchain_core.callbacks import BaseCallbackHandler
-from langchain_openai import ChatOpenAI, AzureChatOpenAI
+from langchain_openai import AzureChatOpenAI
 from pydantic import Field, InstanceOf, PrivateAttr, model_validator
 
 from crewai.agents import CacheHandler, CrewAgentExecutor, CrewAgentParser
@@ -84,7 +84,7 @@ class Agent(BaseAgent):
     llm: Any = Field(
         default_factory=lambda: AzureChatOpenAI(
             model=os.environ.get("azure_deployment", "gpt-4o-mini"),
-            api_version=os.environ.get("api_version","2023-03-15-preview")
+            api_version=os.environ.get("api_version", "2023-03-15-preview"),
         ),
         description="Language model that will run the agent.",
     )
